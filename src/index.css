@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
+*, html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.background {
+  background: linear-gradient(to bottom, #3F375E 40%, #252232 0%); 
+  height: 100vh;
+}
+
+
+
+.header {
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-icons img {
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-links button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.header-links button:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(36, 98, 212);
+}
+
+.header-links img {
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.banner {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.banner-primary {
+  background-image: url('public/images/1917-poster.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  width: 700px;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.banner-data {
+  padding-left: 20px;
+  color: #fff;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.3); 
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.banner-data h2 {
+  font-weight: 500;
+  line-height: 28px;
+  font-size: 26px;
+}
+
+.banner-data p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.banner-secondary {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-2 {
+  height: 50%;
+  background-image: url('public/images/cars-poster.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.banner-3 {
+  height: 50%;
+  background-image: url('public/images/movie3.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.popular, .exibition {
+  color: white;
+  padding-top: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.popular, .exibition, h1 {
+  font-weight: 400;
+}
+
+

@@ -1,5 +1,5 @@
 {
-  "name": "Projeto1",
+  "name": "cinejump",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/pedrochiossi/academia-01-cinema#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "tiny-slider": "^2.9.3"
-  }
+  },
+  "devDependencies": {}
 }

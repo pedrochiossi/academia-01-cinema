@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
   <link rel="stylesheet" type="text/css" href="index.css">
-  <title>Cinema</title>
+  <link rel= "stylesheet" type="text/css" href="public/css/all.min.css">
 </head>
 <body>
   <div class="background">
@@ -38,11 +38,39 @@
       </div>
     </section>
     <section class="popular">
-      <h1>Populares</h1>  
+      <h1>Populares</h1>
+      <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
+        <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
+          <i class="fas fa-angle-left fa-3x"></i>
+        </li>
+        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
+          <i class="fas fa-angle-right fa-3x"></i>
+        </li>
+      </ul>
+      <div class="my-slider">
+        <div class="movie-card">
+          <img src="public/images/mulan.jpg">
+        </div>
+      </div>  
     </section>
     <section class="exibition">
       <h1>Em Exibição</h1>
+      <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
+        <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
+          <i class="fas fa-angle-left fa-3x"></i>
+        </li>
+        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
+          <i class="fas fa-angle-right fa-3x"></i>
+        </li>
+      </ul>
+      <div class="my-slider">
+        <div class="movie-card">
+          <img src="public/images/mulan.jpg">
+        </div>
+      </div>
     </section>
   </div>
+  <script src="/src/index.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

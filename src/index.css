@@ -113,9 +113,12 @@
   border-radius: 20px;
 }
 
+.popular {
+  padding-top: 50px;
+}
+
 .popular, .exibition {
   color: white;
-  padding-top: 50px;
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
@@ -151,6 +154,18 @@
 
 .controls:focus {
   outline: none;
+}
+
+.movie-card .favorite {
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.favorite:hover, .liked {
+  color: #E83F5B;
 }
 
 

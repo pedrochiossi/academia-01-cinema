@@ -1,6 +1,6 @@
 # academia-01-cinema
 
-![screenshot][screenshot]
+![screenshot](public/images/screenshot_cinema.png)
 
 ## About
 This is the first project of the Webjump Frontend academic course. It consists of a single page application that lists movies and tv shows based on popularity and exibition, using data from [TMDb](https://www.themoviedb.org/).
@@ -16,4 +16,4 @@ All data is kept in localStorage.
 * [Axios](https://github.com/axios/axios)
 * [Tiny-slider](https://github.com/ganlanyuan/tiny-slider)
 
-[screenshot] : public/images/screenshot_cinema.png
+

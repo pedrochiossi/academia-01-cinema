@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
   <link rel="stylesheet" type="text/css" href="index.css">
-  <link rel= "stylesheet" type="text/css" href="public/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="public/css/all.min.css">
 </head>
+
 <body>
   <div class="background">
     <header class="header">
       <div class="header-links">
         <img src="public/images/Logo.svg" alt="logo">
-        <button type="button">Filmes</button>
-        <button type="button">Séries</button>
-        <button type="button">Favoritos</button>
+        <button onclick="showContent('movies')" id=movies-button type="button">Filmes</button>
+        <button onclick="showContent('tv_shows')" id="tv-button" type="button">Séries</button>
+        <button onclick="goToFavorites()" id="favorite-button" type="button">Favoritos</button>
       </div>
       <div class="header-icons">
         <img src="public/images/Lupa.svg" alt="lupa">
@@ -28,13 +30,30 @@
         <div class="banner-data">
           <h2 class="banner-title">1997</h2>
           <p class="banner-description">
-            lalalallaalallaallalalalalalalalalalalalalalalalalalalalalalalalalalalallalal
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dicta nam accusamus, molestias nisi nobis
+            facilis vero in eum tenetur quis earum aliquid sapiente natus magnam quasi corporis a sequi.
           </p>
         </div>
       </div>
       <div class="banner-secondary">
-        <div class="banner-2"></div>
-        <div class="banner-3"></div>
+        <div class="banner-2">
+          <div class="banner-data">
+            <h2 class="banner-title">1997</h2>
+            <p class="banner-description">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia dolor illum quibusdam dicta temporibus
+              quam tempora at maxime perferendis optio! Obcaecati laudantium incidunt placeat culpa voluptatibus ipsam
+              accusantium accusamus suscipit?
+            </p>
+          </div>
+        </div>
+        <div class="banner-3">
+          <div class="banner-data">
+            <h2 class="banner-title">1997</h2>
+            <p class="banner-description">
+              lalalallaalallaallalalalalalalalalal
+            </p>
+          </div>
+        </div>
       </div>
     </section>
     <section class="popular">
@@ -43,16 +62,12 @@
         <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
           <i class="fas fa-angle-left fa-3x"></i>
         </li>
-        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
+        <li onclick="handleNextClickPopular()" class="next" data-controls="next" aria-controls="customize"
+          tabindex="-1">
           <i class="fas fa-angle-right fa-3x"></i>
         </li>
       </ul>
-      <div class="popular-slider">
-        <div class="movie-card">
-          <i class="favorite fas fa-heart"></i>
-          <img src="public/images/mulan.jpg">
-        </div>
-      </div>  
+      <div class="popular-slider"></div>
     </section>
     <section class="exibition">
       <h1>Em Exibição</h1>
@@ -60,19 +75,29 @@
         <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
           <i class="fas fa-angle-left fa-3x"></i>
         </li>
-        <li class="next" data-controls="next" aria-controls="customize" tabindex="-1">
+        <li onclick="handleNextClickExibition()" class="next" data-controls="next" aria-controls="customize"
+          tabindex="-1">
           <i class="fas fa-angle-right fa-3x"></i>
         </li>
       </ul>
-      <div class="exibition-slider">
-        <div class="movie-card">
-          <i class="favorite fas fa-heart"></i>
-          <img src="public/images/mulan.jpg">
-        </div>
-      </div>
+      <div class="exibition-slider"></div>
+    </section>
+    <section class="favorites hidden">
+      <h1>Favoritos</h1>
+      <ul class="controls" id="customize-controls-favorites" aria-label="Carousel Navigation" tabindex="0">
+        <li class="prev" data-controls="prev" aria-controls="customize" tabindex="-1">
+          <i class="fas fa-angle-left fa-3x"></i>
+        </li>
+        <li class="next" data-controls="next" aria-controls="customize"
+          tabindex="-1">
+          <i class="fas fa-angle-right fa-3x"></i>
+        </li>
+      </ul>
+      <div class="favorites-slider"></div>
     </section>
   </div>
-  <script src="index.js" ></script>
+  <script src="index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
+
 </html>

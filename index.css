@@ -7,6 +7,9 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.hidden {
+  display: none;
+}
 
 .background {
   background: linear-gradient(to bottom, #3F375E 28vh, #252232 0%); 
@@ -60,6 +63,7 @@
 }
 
 .banner-primary {
+  position: relative;
   background-image: url('public/images/1917-poster.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -69,26 +73,41 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .banner-data {
+  position: absolute;
+  bottom: -100%;
+  left: 2px;
   padding-left: 20px;
   color: #fff;
-  border-radius: 18px;
+  border-radius: 10px;
   background: rgba(0,0,0,0.3); 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: bottom 0.3s ease;
+  width: 96%;
+}
+
+.banner-primary:hover .banner-data, 
+.banner-3:hover .banner-data,
+.banner-2:hover .banner-data {
+  bottom: 0;
 }
 
 .banner-data h2 {
   font-weight: 500;
   line-height: 28px;
   font-size: 26px;
+  margin-bottom: 5px;
 }
 
 .banner-data p {
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
+  word-break: break-word;
 }
 
 .banner-secondary {
@@ -98,6 +117,9 @@
 }
 
 .banner-2 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
   height: 50%;
   background-image: url('public/images/cars-poster.png');
   background-repeat: no-repeat;
@@ -106,6 +128,9 @@
 }
 
 .banner-3 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
   height: 50%;
   background-image: url('public/images/movie3.png');
   background-repeat: no-repeat;
@@ -117,7 +142,7 @@
   padding-top: 50px;
 }
 
-.popular, .exibition {
+.popular, .exibition, .favorites {
   color: white;
   max-width: 1020px;
   margin: 0 auto;
@@ -158,6 +183,7 @@
 
 .movie-card {
   position: relative;
+  cursor: pointer;
 }
 
 .movie-card .favorite {
@@ -166,13 +192,17 @@
   right: 20px;
   font-size: 1.5em;
   cursor: pointer;
+  opacity: 0.5;
 }
 
 .favorite:hover, .liked {
+  opacity: 1 !important;
   color: #E83F5B;
 }
 
 
 .movie-card img {
   border-radius: 10px;
+  width: 154px;
+  height: 231px;
 }

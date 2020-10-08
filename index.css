@@ -142,7 +142,7 @@
   padding-top: 50px;
 }
 
-.popular, .exibition {
+.popular, .exibition, .favorites {
   color: white;
   max-width: 1020px;
   margin: 0 auto;

@@ -5,6 +5,7 @@ const imagesBaseUrl = "https://image.tmdb.org/t/p/";
 
 let popularSlider;
 let exibitionSlider;
+let favoritesSlider;
 let activeContent = 'movies';
 
 const urlTypes = {
@@ -24,18 +25,29 @@ const setParams = (page) => {
   };
 };
 
-const populateContent = async ({ reset = false, listType }) => {
-  const content = JSON.parse(
-    localStorage.getItem(`${listType}_${activeContent}`)
-  );
-  const htmlList = content.results.map((result) => {
-    return ` <div class="movie-card">
-          <i data-id="${result.id}" onclick="handleLike(this)" class="favorite fas fa-heart"></i>
-          <img src="${imagesBaseUrl}/w154/${result.poster_path}" alt="poster-${result.original_title}">
-        </div>`;
+const goToFavorites = () => {
+  if (favoritesSlider) {
+    window.scrollTo(0,document.body.scrollHeight);
+  }
+};
+
+const generateHtmlFromData = (data, isFavorite) => {
+  const html = data.map((content) =>  {
+    return `
+        <div class="movie-card">
+          <i style="${isFavorite ? 'display: none' : ''}" data-id="${content.id}" onclick="handleLike(this)" class="favorite fas fa-heart"></i>
+          <img src="${imagesBaseUrl}/w154/${content.poster_path}" alt="poster-${content.original_title}">
+        </div>`; 
   });
+  return html.join('');
+};
+
+const populateContent = ({ reset = false, listType }) => {
+  const isFavorite = listType === 'favorites'
+  const content = JSON.parse(localStorage.getItem( isFavorite ? 'favorites' : `${listType}_${activeContent}`));
+  const htmlList = generateHtmlFromData(isFavorite ? content : content.results, isFavorite);
   const slider = document.querySelector(`.${listType}-slider`);
-  reset ? slider.innerHTML = htmlList.join('') : slider.innerHTML += htmlList.join('')
+  reset ? slider.innerHTML = htmlList : slider.innerHTML += htmlList
 };
 
 const fetchMovies = async ({ page, listType }) => {
@@ -111,6 +123,21 @@ const updateExibitionSlider = ({reset, info }) => {
   });
 };
 
+const updateFavoritesSlider = () => {
+  favoritesSlider && favoritesSlider.destroy();
+  populateContent({ reset: true, listType: 'favorites'});
+  favoritesSlider = tns({
+    container: '.favorites-slider',
+    items: 6,
+    autoplay: false,
+    loop: false,
+    nav: false,
+    slideBy: 'page',
+    mouseDrag: true,
+    controlsContainer: '#customize-controls-favorites'
+  });
+}
+
 const handleNextClickPopular = async () => {
   const info = popularSlider.getInfo();
   const { total_pages, page } = JSON.parse(
@@ -143,8 +170,31 @@ const handleNextClickExibition = async () => {
   }
 };
 
-const handleLike = (icon) => {
+const handleLike = async (icon) => {
   icon.classList.toggle("liked");
+  const id = icon.getAttribute('data-id');
+  const content = await fetchContentById(id);
+  const favoritesList = JSON.parse(localStorage.getItem('favorites'));
+  const favoritesContainer = document.querySelector('.favorites');
+  if (!favoritesList) {
+    localStorage.setItem('favorites', JSON.stringify([content]));
+    updateFavoritesSlider();
+    favoritesContainer.classList.remove('hidden');
+  } else {
+    const contentIndex = favoritesList.findIndex(content => content.id === Number(id));
+    if (contentIndex !== -1) {
+      favoritesList.splice(contentIndex,1);
+      localStorage.setItem('favorites', JSON.stringify(favoritesList));
+      updateFavoritesSlider();
+      if (favoritesList.length === 0) {
+        favoritesContainer.classList.add('hidden');
+      }
+    } else {
+      localStorage.setItem('favorites', JSON.stringify([...favoritesList, content]));
+      updateFavoritesSlider();
+    }
+  }
+
 };
 
 const showContent = (contentType) => {
@@ -152,6 +202,31 @@ const showContent = (contentType) => {
   updatePopularSlider({ reset: true, contentType});
   updateExibitionSlider({ reset: true, contentType});
 }
+
+const fetchContentById = async (id) => {
+  try {
+    const options = {
+      params: {
+        api_key: tmdbKey,
+        language: 'pt-BR'
+      }
+    };
+    if (activeContent === 'movies') {
+      const response = await axios.get(`${moviesBaseUrl}/${id}`, options);
+      if (response.status === 200) {
+        return response.data;
+      };
+    } 
+    const response = await axios.get(`${tvBaseUrl}/${id}`, options);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 
 window.onload = async () => {
@@ -161,6 +236,11 @@ window.onload = async () => {
   await fetchTvShows({ page: 1, listType: "exibition_tv" });
   populateContent({ listType: "popular", contentType: "movies" });
   populateContent({ listType: "exibition", contentType: "movies" });
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
+  if (favorites && favorites.length > 0) {
+    updateFavoritesSlider();
+    document.querySelector('.favorites').classList.remove('hidden')
+  }
 
   popularSlider = tns({
     container: ".popular-slider",

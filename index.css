@@ -56,7 +56,7 @@
   cursor: pointer;
 }
 
-.banner {
+.banners {
   width: 1000px;
   margin: 0 auto;
   display: flex;
@@ -64,7 +64,6 @@
 
 .banner-primary {
   position: relative;
-  background-image: url('public/images/1917-poster.png');
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
@@ -75,19 +74,22 @@
   justify-content: flex-end;
   overflow: hidden;
   cursor: pointer;
+  margin-right: 10px;
+  transition: background-image 0.5s ease-in-out;
 }
 
 .banner-data {
   position: absolute;
   bottom: -100%;
-  left: 2px;
-  padding-left: 20px;
+  padding: 10px 15px;
+  padding-right: 0;
   color: #fff;
   border-radius: 10px;
   background: rgba(0,0,0,0.3); 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   transition: bottom 0.3s ease;
-  width: 96%;
+  width: 98%;
+  
 }
 
 .banner-primary:hover .banner-data, 
@@ -106,7 +108,7 @@
 .banner-data p {
   font-weight: 300;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 20px;
   word-break: break-word;
 }
 
@@ -121,10 +123,11 @@
   overflow: hidden;
   cursor: pointer;
   height: 50%;
-  background-image: url('public/images/cars-poster.png');
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
+  margin-bottom: 10px;
+  transition: background-image 1s ease-in-out;
 }
 
 .banner-3 {
@@ -132,10 +135,10 @@
   overflow: hidden;
   cursor: pointer;
   height: 50%;
-  background-image: url('public/images/movie3.png');
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
+  transition: background-image 1s ease-in-out;
 }
 
 .popular {

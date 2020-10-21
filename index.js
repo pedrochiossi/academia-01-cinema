@@ -138,6 +138,39 @@ const updateFavoritesSlider = () => {
   });
 }
 
+const getRandomContent = (data) => {
+  const index = Math.floor(Math.random() * data.length);
+  return data[index];
+}
+
+const updateBanners = () => {
+  const { results } = JSON.parse(localStorage.getItem(`popular_${activeContent}`));
+
+  const bannerPrimary = document.querySelector('.banner-primary');
+  let randomData = getRandomContent(results);
+  bannerPrimary.style.backgroundImage = `url(${imagesBaseUrl}/w780/${randomData.backdrop_path})`
+  const title = bannerPrimary.querySelector('h2');
+  if (activeContent === 'movies') {
+    title.innerText = randomData.title;
+  } else {
+    title.innerText = randomData.name;
+  }
+  bannerPrimary.querySelector('p').innerText = randomData.overview;
+
+  const bannerSecondary = document.querySelector('.banner-secondary');
+  for (let i = 0; i < 2; i += 1) {
+    randomData = getRandomContent(results);
+    const child = bannerSecondary.children[i]
+    child.style.backgroundImage = `url(${imagesBaseUrl}/w342/${randomData.backdrop_path})`
+    const title = child.querySelector('h2');
+    if (activeContent === 'movies') {
+      title.innerText = randomData.title;
+    } else {
+      title.innerText = randomData.name;
+    }
+  }
+}
+
 const handleNextClickPopular = async () => {
   const info = popularSlider.getInfo();
   const { total_pages, page } = JSON.parse(
@@ -199,6 +232,7 @@ const handleLike = async (icon) => {
 
 const showContent = (contentType) => {
   activeContent = contentType;
+  updateBanners();
   updatePopularSlider({ reset: true, contentType});
   updateExibitionSlider({ reset: true, contentType});
 }
@@ -225,8 +259,6 @@ const fetchContentById = async (id) => {
     console.log(error);
   }
 };
-
-
 
 
 window.onload = async () => {
@@ -263,4 +295,11 @@ window.onload = async () => {
     mouseDrag: true,
     controlsContainer: "#customize-controls-exibition",
   });
+
+  updateBanners();
+
+  setInterval(() => {
+    updateBanners();
+  }, 60 * 1000);
+
 };

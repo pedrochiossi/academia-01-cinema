@@ -235,6 +235,7 @@ const showContent = (contentType) => {
   updateBanners();
   updatePopularSlider({ reset: true, contentType});
   updateExibitionSlider({ reset: true, contentType});
+  updateLikes();
 }
 
 const fetchContentById = async (id) => {
@@ -260,6 +261,14 @@ const fetchContentById = async (id) => {
   }
 };
 
+const updateLikes = () => {
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
+  favorites.forEach(favorite => {
+    const card = document.querySelector(`[data-id="${favorite.id}"]`);
+    card.classList.add('liked');
+  });
+}
+
 
 window.onload = async () => {
   await fetchMovies({ page: 1, listType: "popular" });
@@ -268,12 +277,7 @@ window.onload = async () => {
   await fetchTvShows({ page: 1, listType: "exibition_tv" });
   populateContent({ listType: "popular", contentType: "movies" });
   populateContent({ listType: "exibition", contentType: "movies" });
-  const favorites = JSON.parse(localStorage.getItem('favorites'));
-  if (favorites && favorites.length > 0) {
-    updateFavoritesSlider();
-    document.querySelector('.favorites').classList.remove('hidden')
-  }
-
+  
   popularSlider = tns({
     container: ".popular-slider",
     items: 6,
@@ -295,6 +299,14 @@ window.onload = async () => {
     mouseDrag: true,
     controlsContainer: "#customize-controls-exibition",
   });
+
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
+  if (favorites && favorites.length > 0) {
+
+    updateFavoritesSlider();
+    updateLikes();
+    document.querySelector('.favorites').classList.remove('hidden');
+  }
 
   updateBanners();
 

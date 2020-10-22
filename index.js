@@ -209,7 +209,7 @@ const handleLike = async (icon) => {
   const content = await fetchContentById(id);
   const favoritesList = JSON.parse(localStorage.getItem('favorites'));
   const favoritesContainer = document.querySelector('.favorites');
-  if (!favoritesList) {
+  if (!favoritesList || favoritesList.length === 0) {
     localStorage.setItem('favorites', JSON.stringify([content]));
     updateFavoritesSlider();
     favoritesContainer.classList.remove('hidden');
